@@ -1,0 +1,41 @@
+package commands
+
+import (
+	"database/sql"
+
+	card "src/app/models/cards"
+
+	_ "github.com/lib/pq"
+)
+
+func checkError(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+
+func InsertCard(card card.CardModel, db *sql.DB) bool {
+	command := `insert into 
+					"Cards"("title","description","imgUri","dateCreated")
+					values($1,$2,$3,$4)`
+
+	_, err := db.Exec(command, card.Title, card.Description, card.ImgUri, card.DateCreated)
+	checkError(err)
+	return true
+}
+
+func DeleteCardById(id int, db *sql.DB) bool {
+	deleteCommand := `DELETE FROM "Cards" where id=$1`
+
+	_, err := db.Exec(deleteCommand, id)
+	checkError(err)
+	return true
+}
+
+func UpdateCardById(card card.CardModel, db *sql.DB) bool {
+	updateCommand := `UPDATE "Cards" SET "title"=$1, "description"=$2, "imgUri"=$3, "isStarred"=$4 WHERE "id"=$5`
+
+	_, err := db.Exec(updateCommand, card.Title, card.Description, card.ImgUri, card.IsStarred, card.Id)
+	checkError(err)
+	return true
+}
