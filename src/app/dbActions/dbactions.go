@@ -34,18 +34,18 @@ func SelectCards(db *sql.DB) []cardModel {
 	return cardCollections
 }
 
-func SelectCardById(id int, db *sql.DB) {
+func SelectCardById(id int, db *sql.DB) card.CardModel {
 	query := `SELECT * FROM "Cards" WHERE "id"=$1`
 	tuple, err := db.Query(query, id)
 	CheckError(err)
 
 	defer tuple.Close()
-	var card cardModel
+	var card card.CardModel
 	for tuple.Next() {
 		err = tuple.Scan(&card.Id, &card.Title, &card.Description, &card.ImgUri, &card.DateCreated, &card.IsStarred)
 		CheckError(err)
-		fmt.Print(card)
 	}
+	return card
 }
 
 func InsertCard(card card.CardModel, db *sql.DB) bool {
@@ -68,7 +68,11 @@ func DeleteCardById(id int, db *sql.DB) bool {
 
 // UpdateCardById(id int, card Card, db *sql.DB)
 func UpdateCardById(card card.CardModel, db *sql.DB) {
+	updateCommand := `UPDATE "Cards" SET "title"=$1, "description"=$2, "imgUri"=$3, "isStarred"=$4 WHERE "id"=$5`
 
+	_, err := db.Exec(updateCommand, card.Title, card.Description, card.ImgUri, card.IsStarred, card.Id)
+	CheckError(err)
+	fmt.Println("update success")
 }
 
 //StarCardById(id int, db *sql.DB)
