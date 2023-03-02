@@ -1,7 +1,19 @@
 package app
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+	"net/http"
 
-func PrintHello() {
-	fmt.Println("Hello, Modules! This is mypackage speaking!")
+	cardRoutes "src/app/routes/cardRoutes"
+
+	"github.com/gorilla/mux"
+)
+
+func App() {
+	router := mux.NewRouter()
+	cardRoutes.SetUpRoutes(router)
+
+	fmt.Println("server started on port 8000")
+	log.Fatal(http.ListenAndServe(":8000", router))
 }

@@ -16,15 +16,15 @@ func checkError(err error) {
 	}
 }
 
-func SelectCards(db *sql.DB) []cardModel {
+func SelectCards(db *sql.DB) []card.CardModel {
 	tuples, err := db.Query(`SELECT * FROM "Cards"`)
 	checkError(err)
 
-	var cardCollections []cardModel
+	var cardCollections []card.CardModel
 
 	defer tuples.Close()
 	for tuples.Next() {
-		var card cardModel
+		var card card.CardModel
 
 		err = tuples.Scan(&card.Id, &card.Title, &card.Description, &card.ImgUri, &card.DateCreated, &card.IsStarred)
 		checkError(err)

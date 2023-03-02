@@ -10,5 +10,11 @@ type CardModel struct {
 	Description string    `json:"description"`
 	ImgUri      string    `json:"imgUri"`
 	DateCreated time.Time `json:"dateCreated"`
-	IsStarred   bool      `json:"isStarred"`
+	IsStarred   *bool     `json:"isStarred"`
+}
+
+type JsonResponse struct {
+	Type    string      `json:"type"`
+	Data    []CardModel `json:"data"`
+	Message string      `json:"message"`
 }
