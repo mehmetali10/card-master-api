@@ -54,3 +54,23 @@ func CreateCard(w http.ResponseWriter, r *http.Request) {
 
 	json.NewEncoder(w).Encode(response)
 }
+
+func DeleteCardById(w http.ResponseWriter, r *http.Request) {
+	db := database.ConnectDB()
+	defer db.Close()
+
+	var stringId = r.Header.Get("id")
+	id, err := strconv.Atoi(stringId)
+	database.CheckError(err)
+	result := cardCommands.DeleteCardById(id, db)
+
+	var response card.JsonResponse
+
+	if result {
+		response = card.JsonResponse{Type: "202", Message: "success delete"}
+	} else {
+		response = card.JsonResponse{Type: "204", Message: "failed delete"}
+	}
+
+	json.NewEncoder(w).Encode(response)
+}
