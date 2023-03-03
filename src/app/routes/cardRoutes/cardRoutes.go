@@ -6,7 +6,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func SetUpRoutes(router *mux.Router) {
+func SetUpCardRoutes(router *mux.Router) {
 	router.HandleFunc("/cards", cardhandlers.GetCards).Methods("GET")
 	router.HandleFunc("/cards/{id}", cardhandlers.GetCardById).Methods("GET")
+	router.HandleFunc("/cards", cardhandlers.CreateCard).Methods("POST")
 }
