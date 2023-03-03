@@ -11,4 +11,5 @@ func SetUpCardRoutes(router *mux.Router) {
 	router.HandleFunc("/cards/{id}", cardhandlers.GetCardById).Methods("GET")
 	router.HandleFunc("/cards", cardhandlers.CreateCard).Methods("POST")
 	router.HandleFunc("/cards/{id}", cardhandlers.DeleteCardById).Methods("DELETE")
+	router.HandleFunc("/cards", cardhandlers.UpdateCardById).Methods("PUT")
 }

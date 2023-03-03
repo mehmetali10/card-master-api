@@ -74,3 +74,27 @@ func DeleteCardById(w http.ResponseWriter, r *http.Request) {
 
 	json.NewEncoder(w).Encode(response)
 }
+
+func UpdateCardById(w http.ResponseWriter, r *http.Request) {
+	db := database.ConnectDB()
+	defer db.Close()
+
+	var uCard card.CardModel
+	err := json.NewDecoder(r.Body).Decode(&uCard)
+	defer r.Body.Close()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	result := cardCommands.UpdateCardById(uCard, db)
+	var response card.JsonResponse
+
+	if result {
+		response = card.JsonResponse{Type: "200", Message: "success put", Data: []card.CardModel{uCard}}
+	} else {
+		response = card.JsonResponse{Type: "204", Message: "failed put", Data: []card.CardModel{uCard}}
+	}
+
+	json.NewEncoder(w).Encode(response)
+}

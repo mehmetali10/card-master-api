@@ -16,10 +16,10 @@ func checkError(err error) {
 
 func InsertCard(card card.CardModel, db *sql.DB) bool {
 	command := `insert into 
-					"Cards"("title","description","imgUri","dateCreated")
-					values($1,$2,$3,$4)`
+					"Cards"("title","description","imgUri","dateCreated","isStarred")
+					values($1,$2,$3,$4,$5)`
 
-	_, err := db.Exec(command, card.Title, card.Description, card.ImgUri, card.DateCreated)
+	_, err := db.Exec(command, card.Title, card.Description, card.ImgUri, card.DateCreated, false)
 	checkError(err)
 	return true
 }
