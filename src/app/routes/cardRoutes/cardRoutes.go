@@ -8,4 +8,5 @@ import (
 
 func SetUpRoutes(router *mux.Router) {
 	router.HandleFunc("/cards", cardhandlers.GetCards).Methods("GET")
+	router.HandleFunc("/cards/{id}", cardhandlers.GetCardById).Methods("GET")
 }
