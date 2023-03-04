@@ -47,7 +47,7 @@ func CreateCard(w http.ResponseWriter, r *http.Request) {
 	var response card.JsonResponse
 
 	if result {
-		response = card.JsonResponse{Type: "success insert", Data: nil, Message: "201"}
+		response = card.JsonResponse{Type: "success insert", Data: []card.CardModel{newCard}, Message: "201"}
 	} else {
 		response = card.JsonResponse{Type: "failed insert", Data: nil, Message: "401"}
 	}
