@@ -16,7 +16,7 @@ func GetCards(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 	cardCollections := cardQueries.SelectCards(db)
 
-	var response = card.JsonResponse{Type: "success", Data: cardCollections, Message: "Success getting"}
+	var response = card.JsonResponseGetCards{Data: cardCollections}
 	json.NewEncoder(w).Encode(response)
 }
 

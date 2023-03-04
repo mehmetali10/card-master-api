@@ -18,3 +18,7 @@ type JsonResponse struct {
 	Data    []CardModel `json:"data"`
 	Message string      `json:"message"`
 }
+
+type JsonResponseGetCards struct {
+	Data []CardModel `json:"data"`
+}
