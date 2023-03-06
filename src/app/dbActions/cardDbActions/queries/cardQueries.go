@@ -17,7 +17,7 @@ func checkError(err error) {
 }
 
 func SelectCards(db *sql.DB) []card.CardModel {
-	tuples, err := db.Query(`SELECT * FROM "Cards"`)
+	tuples, err := db.Query(`SELECT * FROM "tb_casestudy"`)
 	checkError(err)
 
 	var cardCollections []card.CardModel
@@ -34,7 +34,7 @@ func SelectCards(db *sql.DB) []card.CardModel {
 }
 
 func SelectCardById(id int, db *sql.DB) card.CardModel {
-	query := `SELECT * FROM "Cards" WHERE "id"=$1`
+	query := `SELECT * FROM "tb_casestudy" WHERE "id"=$1`
 	tuple, err := db.Query(query, id)
 	checkError(err)
 

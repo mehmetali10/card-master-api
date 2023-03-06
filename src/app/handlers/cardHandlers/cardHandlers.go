@@ -28,7 +28,7 @@ func GetCardById(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(stringId)
 	database.CheckError(err)
 	returnedCard := cardQueries.SelectCardById(id, db)
-	var response = card.JsonResponse{Type: "success", Data: []card.CardModel{returnedCard}, Message: "success getting"}
+	var response = card.JsonResponse{Type: "success", Data: []card.CardModel{returnedCard}}
 	json.NewEncoder(w).Encode(response)
 }
 
