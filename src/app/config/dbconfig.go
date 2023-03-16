@@ -11,8 +11,8 @@ const (
 	host     = "localhost"
 	port     = 5439
 	user     = "postgres"
-	password = "depixen-pass"
-	dbname   = "postgres"
+	password = "unbroken"
+	dbname   = "card_master_db"
 )
 
 func CheckError(err error) {
