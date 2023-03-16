@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: unbroken
+      POSTGRES_DB: card_master_db
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5439
+      DB_USER: postgres
+      DB_PASSWORD: unbroken
+      DB_NAME: card_master_db
+
+volumes:
+  db-data:
