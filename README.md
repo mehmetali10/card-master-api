@@ -51,7 +51,7 @@ This will return a JSON response containing a list of all cards.
 <br /><br />
 
 ## Configuration
-Card Master API can be configured using environment variables. The following environment variables are supported:
+Card Master API has thoose database config values in the dbconfig file:
 <br /><br />
 
 <strong>DB_HOST</strong> : The hostname of the PostgreSQL database (default: <strong>localhost</strong>)<br />
