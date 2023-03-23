@@ -45,7 +45,7 @@ To use the API, you can use a tool like curl or a REST client like Postman.
 <br /><br />
 For example, to get a list of all cards, you can run the following command:
 <br /><br />
-<code>curl http://localhost:8080/cards</code>
+<code>curl http://localhost:8000/cards</code>
 <br /><br />
 This will return a JSON response containing a list of all cards.
 <br /><br />
